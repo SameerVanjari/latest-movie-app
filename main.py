@@ -1,10 +1,9 @@
-import requests
-from bs4 import BeautifulSoup
+from flask import Flask, render_template, request
+import scrape_bot
 
-URL = 'https://www.freejobalert.com/upcoming-exam-dates-of-various-jobs/1835/'
-req = requests.get(URL)
+app = Flask(__name__)
 
-soup = BeautifulSoup(req.content, 'html5lib')
-
-with open("index22.html", "w", encoding='utf-8') as fp:
-    fp.write(soup.prettify())
+@app.route('/')
+def homepage():
+    movies = scrape_bot.get_movies
+    return render_template('index.html', movies=movies)
